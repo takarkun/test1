@@ -12,6 +12,18 @@
   --shadow: 0 18px 50px rgba(63, 57, 46, 0.08);
 }
 
+:root[data-theme="dark"] {
+  --paper: #202522;
+  --ink: #f0eee7;
+  --muted: #aeb6af;
+  --line: #3c4540;
+  --card: #2a302c;
+  --accent: #f28a68;
+  --accent-soft: #513b35;
+  --sage: #91b49d;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+}
+
 * { box-sizing: border-box; }
 
 body {
@@ -21,6 +33,7 @@ body {
   background: var(--paper);
   font-family: 'DM Sans', 'Yu Gothic', sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: color .2s, background-color .2s;
 }
 
 body::before {
@@ -45,11 +58,15 @@ button { cursor: pointer; }
 }
 
 .app-header {
+  position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   margin-bottom: 34px;
 }
+
+.theme-button { flex: 0 0 34px; width: 34px; height: 34px; padding: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); background: var(--card); font-size: 13px; line-height: 1; }
+.theme-button:hover { color: white; border-color: var(--accent); background: var(--accent); }
 
 .eyebrow {
   margin: 0 0 13px;
@@ -88,7 +105,7 @@ h1 { margin: 0; font-size: clamp(35px, 6vw, 50px); line-height: 1.15; letter-spa
 }
 .plus-mark { color: var(--accent); font-size: 25px; font-weight: 400; line-height: 1; }
 .composer input { min-width: 0; flex: 1; border: 0; outline: 0; color: var(--ink); background: transparent; font-size: 15px; }
-.composer input::placeholder { color: #a8aaa4; }
+.composer input::placeholder { color: var(--muted); }
 .add-button { border: 0; border-radius: 3px; padding: 12px 20px; color: white; background: var(--ink); font-size: 13px; font-weight: 700; transition: background .2s, transform .2s; }
 .add-button:hover { background: var(--accent); transform: translateY(-1px); }
 

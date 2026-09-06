@@ -1,5 +1,6 @@
 const STORAGE_KEY = 'simple-todo-tasks';
 const ROOM_KEY = 'simple-todo-room';
+const THEME_KEY = 'simple-todo-theme';
 const SUPABASE_URL = '';
 const SUPABASE_ANON_KEY = '';
 const supabaseClient = SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase
@@ -33,7 +34,18 @@ const elements = {
   joinRoomButton: document.querySelector('#joinRoomButton'),
   roomLabel: document.querySelector('#roomLabel'),
   syncStatus: document.querySelector('#syncStatus'),
+  themeButton: document.querySelector('#themeButton'),
 };
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  elements.themeButton.textContent = theme === 'dark' ? '日' : '月';
+  elements.themeButton.setAttribute('aria-label', theme === 'dark' ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+}
+
+const savedTheme = localStorage.getItem(THEME_KEY);
+const initialTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+applyTheme(initialTheme);
 
 const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
   year: 'numeric',
@@ -218,6 +230,11 @@ elements.clearButton.addEventListener('click', () => {
 elements.joinRoomButton.addEventListener('click', joinRoom);
 elements.roomInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') joinRoom();
+});
+elements.themeButton.addEventListener('click', () => {
+  const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem(THEME_KEY, nextTheme);
+  applyTheme(nextTheme);
 });
 
 render();
