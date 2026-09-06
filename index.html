@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f4ee" />
+    <title>今日のToDo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">PERSONAL SPACE</p>
+          <h1>今日のToDo</h1>
+          <p class="date" id="today"></p>
+        </div>
+        <div class="progress-wrap" aria-label="タスク達成率">
+          <div class="progress-ring" id="progressRing">
+            <span id="progressValue">0%</span>
+          </div>
+          <span>達成率</span>
+        </div>
+      </header>
+
+      <section class="composer" aria-label="タスクを追加">
+        <span class="plus-mark" aria-hidden="true">+</span>
+        <input id="taskInput" type="text" maxlength="100" placeholder="新しいタスクを追加..." autocomplete="off" />
+        <button class="add-button" id="addButton" type="button">追加</button>
+      </section>
+
+      <section class="sharing-bar" aria-label="共有設定">
+        <div>
+          <span class="sharing-label">共有スペース</span>
+          <strong id="roomLabel">個人用</strong>
+          <span class="sync-status" id="syncStatus">この端末に保存中</span>
+        </div>
+        <div class="sharing-actions">
+          <input id="roomInput" type="text" maxlength="24" placeholder="部屋コード" autocomplete="off" aria-label="共有部屋コード" />
+          <button class="share-button" id="joinRoomButton" type="button">共有する</button>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="タスクの表示設定">
+        <div class="filters" role="group" aria-label="表示するタスク">
+          <button class="filter-button is-active" type="button" data-filter="all">すべて <span id="allCount">0</span></button>
+          <button class="filter-button" type="button" data-filter="active">未完了 <span id="activeCount">0</span></button>
+          <button class="filter-button" type="button" data-filter="completed">完了 <span id="completedCount">0</span></button>
+        </div>
+        <button class="clear-button" id="clearButton" type="button">完了済みを削除</button>
+      </section>
+
+      <section class="task-panel">
+        <div class="task-list" id="taskList" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <div class="empty-icon" aria-hidden="true">✓</div>
+          <h2 id="emptyTitle">タスクはありません</h2>
+          <p id="emptyText">上の入力欄から、今日やることを追加しましょう。</p>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <span id="remainingText">0個のタスク</span>
+        <span class="footer-dot" aria-hidden="true">·</span>
+        <span>ブラウザに自動保存</span>
+      </footer>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
